@@ -2,10 +2,17 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ✅ AJUSTE PARA EVITAR ZOOM -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
 <title>Dia das Mães 💛</title>
 
 <style>
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -94,6 +101,7 @@ button {
   cursor: pointer;
 }
 
+/* ✅ INPUT SEM ZOOM */
 input {
   width: 85%;
   max-width: 320px;
@@ -101,6 +109,8 @@ input {
   margin: 10px;
   border-radius: 10px;
   border: 1px solid #ddd;
+
+  font-size: 16px;
 }
 
 /* CONTADOR */
@@ -185,7 +195,7 @@ input {
 
     <input id="nomePessoa" placeholder="Seu nome">
     <input id="nomeMae" placeholder="Nome da mãe">
-    <input id="telefoneMae" placeholder="Telefone">
+    <input id="telefoneMae" placeholder="Whatsapp - Ex: 11987654321">
 
     <button onclick="enviarFilho()">Enviar 💌</button>
   </div>
@@ -202,7 +212,7 @@ input {
 
     <input id="nomeMaeMsg" placeholder="Seu nome">
     <input id="nomeFilho" placeholder="Nome do filho(a)">
-    <input id="telefoneFilho" placeholder="Telefone">
+    <input id="telefoneFilho" placeholder="Whatsapp - Ex: 11987654321">
 
     <button onclick="enviarMae()">Enviar 💛</button>
   </div>
@@ -223,7 +233,6 @@ function atualizarContador() {
   document.getElementById("contador").innerText = contador;
 }
 
-/* CORAÇÕES */
 function criarCoracao() {
   let heart = document.createElement("div");
   heart.className = "heart";
@@ -244,7 +253,6 @@ function coracoesExplosao() {
   for (let i = 0; i < 10; i++) criarCoracao();
 }
 
-/* FILHO → MÃE */
 function enviarFilho() {
   let nome = document.getElementById("nomePessoa").value;
   let mae = document.getElementById("nomeMae").value;
@@ -264,7 +272,6 @@ ${nome}`;
   window.open(`https://wa.me/55${tel}?text=${encodeURIComponent(msg)}`);
 }
 
-/* MÃE → FILHO */
 function enviarMae() {
   let mae = document.getElementById("nomeMaeMsg").value;
   let filho = document.getElementById("nomeFilho").value;
