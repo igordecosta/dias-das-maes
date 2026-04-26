@@ -299,11 +299,22 @@ function enviarMae() {
   atualizarContador();
   coracoesExplosao();
 
-  let msg = `${filho}, ser sua mãe é uma das coisas mais importantes da minha vida.
-Em cada fase sua, eu aprendo, me reinvento e sigo tentando dar o meu melhor por você.
-Nem sempre eu acerto, mas tudo que faço é por amor.
-Obrigada por ser quem você é.
-Eu te amo mais do que consigo explicar 💛 ${mae}`;
+  let msg = `💛 *${filho},* 💛
+
+Ser sua mãe é uma das coisas *MAIS IMPORTANTES* da minha vida 🥹✨
+
+Em cada fase sua, eu aprendo, me reinvento e sigo tentando dar o meu *MELHOR* por você 🌱
+
+Nem sempre eu acerto…
+mas _tudo_ que faço é por *AMOR* ❤️
+
+Obrigada por ser exatamente quem você é 💫
+_Você é especial demais pra mim!_
+
+Eu te amo mais do que consigo explicar 💛
+
+💌 *Com todo meu amor,*
+*${mae}*`;
 
   window.open(`https://wa.me/55${tel}?text=${encodeURIComponent(msg)}`);
 }
