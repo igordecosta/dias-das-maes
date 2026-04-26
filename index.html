@@ -11,6 +11,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   background: linear-gradient(135deg, #fff5f0, #ffe3d4);
   text-align: center;
+  overflow-x: hidden;
 }
 
 /* HEADER */
@@ -43,7 +44,7 @@ body {
   display: block;
 }
 
-/* VOLTAR */
+/* VOLTAR AJUSTADO */
 .voltar-container {
   display: flex;
   justify-content: flex-end;
@@ -54,10 +55,11 @@ body {
   background: transparent;
   color: #FF6200;
   border: 1px solid #FF6200;
-  padding: 4px 12px;
+  padding: 4px 10px;
   border-radius: 20px;
   font-size: 12px;
   cursor: pointer;
+  width: fit-content;
 }
 
 /* CARD */
@@ -111,14 +113,22 @@ input {
 /* CORAÇÕES */
 .heart {
   position: fixed;
-  bottom: 0;
-  font-size: 20px;
-  animation: subir 2s linear forwards;
+  bottom: -20px;
+  font-size: 16px;
+  animation: subir 4s linear forwards;
+  opacity: 0.85;
+  pointer-events: none;
 }
 
 @keyframes subir {
-  0% {transform: translateY(0); opacity: 1;}
-  100% {transform: translateY(-300px); opacity: 0;}
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.5);
+    opacity: 0;
+  }
 }
 </style>
 </head>
@@ -146,7 +156,7 @@ input {
 
     <p class="sub">
       Às vezes a gente sente… mas não fala.<br>
-      Hoje você pode mudar isso 💛
+      Hoje você pode mudar isso 🧡
     </p>
 
     <button onclick="proximaTela('tela2')">Falar agora</button>
@@ -219,19 +229,32 @@ function atualizarContador() {
   document.getElementById("contador").innerText = contador;
 }
 
-function coracoes() {
+/* CORAÇÕES */
+function criarCoracao() {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+
+  let cores = ["❤️", "🧡", "💙"];
+  heart.innerHTML = cores[Math.floor(Math.random() * cores.length)];
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 10 + 12) + "px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 4000);
+}
+
+setInterval(criarCoracao, 600);
+
+/* EXPLOSÃO */
+function coracoesExplosao() {
   for (let i = 0; i < 10; i++) {
-    let heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 2000);
+    criarCoracao();
   }
 }
 
-/* FILHO → MÃE */
+/* FILHO */
 function enviarFilho() {
   let nome = document.getElementById("nomePessoa").value;
   let mae = document.getElementById("nomeMae").value;
@@ -240,18 +263,16 @@ function enviarFilho() {
   if (!nome || !mae || !tel) return alert("Preencha tudo");
 
   atualizarContador();
-  coracoes();
+  coracoesExplosao();
 
-  let msg = `Mãe ${mae}, queria que você soubesse o quanto eu sou grato por tudo que você é e tudo que você faz por mim. Gratidão por cada gesto, cada palavra, cada sacrifício que muitas vezes passou em silêncio, mas nunca deixou de me alcançar. Seu jeito de cuidar, de se preocupar, de amar... é tudo tão único, tão seu. Você é minha paz em forma de gente.
-Agradeço por ser sempre refúgio, mesmo quando o mundo parece barulhento demais.
-Te amo com todo o meu coração, hoje, amanhã e sempre. E toda vez que eu puder retribuir só um pedacinho do que você me deu, vou me sentir muito feliz.
+  let msg = `Mãe ${mae}, queria que você soubesse o quanto eu sou grato por tudo que você é e tudo que você faz por mim...
 Eu te amo,
 ${nome}`;
 
   window.open(`https://wa.me/55${tel}?text=${encodeURIComponent(msg)}`);
 }
 
-/* MÃE → FILHO (ATUALIZADO) */
+/* MÃE */
 function enviarMae() {
   let mae = document.getElementById("nomeMaeMsg").value;
   let filho = document.getElementById("nomeFilho").value;
@@ -260,13 +281,9 @@ function enviarMae() {
   if (!mae || !filho || !tel) return alert("Preencha tudo");
 
   atualizarContador();
-  coracoes();
+  coracoesExplosao();
 
-  let msg = `${filho}, ser sua mãe é uma das coisas mais importantes da minha vida.
-Em cada fase sua, eu aprendo, me reinvento e sigo tentando dar o meu melhor por você.
-Nem sempre eu acerto, mas tudo que faço é por amor.
-Obrigada por ser quem você é.
-Eu te amo mais do que consigo explicar 💛
+  let msg = `${filho}, ser sua mãe é uma das coisas mais importantes da minha vida...
 ${mae}`;
 
   window.open(`https://wa.me/55${tel}?text=${encodeURIComponent(msg)}`);
