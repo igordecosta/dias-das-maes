@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dia das Mães 💛</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #fff5f0, #ffe3d4);
+  text-align: center;
+}
+
+/* HEADER */
+.header-global {
+  background: white;
+  padding: 15px 10px 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.preto { color: #000; }
+.laranja { color: #FF6200; }
+
+.header-sub {
+  font-size: 12px;
+  color: #888;
+}
+
+/* TELAS */
+.screen {
+  display: none;
+  padding: 10px 20px 30px;
+}
+
+.active {
+  display: block;
+}
+
+/* BOTÃO VOLTAR AJUSTADO */
+.voltar-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.voltar {
+  background: transparent;
+  color: #FF6200;
+  border: 1px solid #FF6200;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+
+  /* ESSENCIAL */
+  width: auto;
+  display: inline-block;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+.titulo span {
+  color: #FF6200;
+  font-weight: bold;
+}
+
+.sub {
+  color: #666;
+  margin: 20px 0;
+}
+
+button {
+  background: #FF6200;
+  color: white;
+  border: none;
+  padding: 16px;
+  margin: 10px;
+  border-radius: 12px;
+  width: 85%;
+  max-width: 320px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input {
+  width: 85%;
+  max-width: 320px;
+  padding: 14px;
+  margin: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+/* CONTADOR */
+.counter {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* CORAÇÕES */
+.heart {
+  position: fixed;
+  bottom: 0;
+  font-size: 20px;
+  animation: subir 2s linear forwards;
+}
+
+@keyframes subir {
+  0% {transform: translateY(0); opacity: 1;}
+  100% {transform: translateY(-300px); opacity: 0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header-global">
+  <div class="header-title">
+    <span class="preto">Radar do Clima</span>
+    <span class="laranja"> SRH</span>
+  </div>
+  <div class="header-sub">
+    Superintendência Folhas de Pagamento e Soluções de RH
+  </div>
+</div>
+
+<!-- TELA 1 -->
+<div id="tela1" class="screen active">
+  <div class="card">
+    <h2 class="titulo">
+      Quando foi a última vez que você disse <br>
+      <span>“eu te amo”</span>?
+    </h2>
+
+    <p class="sub">
+      Às vezes a gente sente… mas não fala.<br>
+      Hoje você pode mudar isso 💛
+    </p>
+
+    <button onclick="proximaTela('tela2')">Falar agora</button>
+
+    <div class="counter">
+      💌 <span id="contador">0</span> mensagens enviadas hoje
+    </div>
+  </div>
+</div>
+
+<!-- TELA 2 -->
+<div id="tela2" class="screen">
+  <div class="voltar-container">
+    <button class="voltar" onclick="proximaTela('tela1')">Voltar</button>
+  </div>
+
+  <div class="card">
+    <h2>Quem é você?</h2>
+    <button onclick="proximaTela('tela3')">Sou filho ou filha</button>
+    <button onclick="proximaTela('tela4')">Sou mãe</button>
+  </div>
+</div>
+
+<!-- FILHO -->
+<div id="tela3" class="screen">
+  <div class="voltar-container">
+    <button class="voltar" onclick="proximaTela('tela2')">Voltar</button>
+  </div>
+
+  <div class="card">
+    <h2>Preencha os dados</h2>
+
+    <input id="nomePessoa" placeholder="Seu nome">
+    <input id="nomeMae" placeholder="Nome da mãe">
+    <input id="telefoneMae" placeholder="Telefone">
+
+    <button onclick="enviarFilho()">Enviar 💌</button>
+  </div>
+</div>
+
+<!-- MÃE -->
+<div id="tela4" class="screen">
+  <div class="voltar-container">
+    <button class="voltar" onclick="proximaTela('tela2')">Voltar</button>
+  </div>
+
+  <div class="card">
+    <h2>Preencha os dados</h2>
+
+    <input id="nomeMaeMsg" placeholder="Seu nome">
+    <input id="nomeFilho" placeholder="Nome do filho(a)">
+    <input id="telefoneFilho" placeholder="Telefone">
+
+    <button onclick="enviarMae()">Enviar 💛</button>
+  </div>
+</div>
+
+<script>
+let contador = localStorage.getItem("contador") || 0;
+document.getElementById("contador").innerText = contador;
+
+function proximaTela(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function atualizarContador() {
+  contador++;
+  localStorage.setItem("contador", contador);
+  document.getElementById("contador").innerText = contador;
+}
+
+function coracoes() {
+  for (let i = 0; i < 10; i++) {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 2000);
+  }
+}
+
+function enviarFilho() {
+  let nome = document.getElementById("nomePessoa").value;
+  let mae = document.getElementById("nomeMae").value;
+  let tel = document.getElementById("telefoneMae").value.replace(/\D/g,'');
+
+  if (!nome || !mae || !tel) return alert("Preencha tudo");
+
+  atualizarContador();
+  coracoes();
+
+  let msg = `Mãe ${mae}, queria que você soubesse o quanto eu sou grato por tudo que você é...
+
+Eu te amo. <3
+${nome}`;
+
+  window.open(`https://wa.me/55${tel}?text=${encodeURIComponent(msg)}`);
+}
+
+function enviarMae() {
+  let mae = document.getElementById("nomeMaeMsg").value;
+  let filho = document.getElementById("nomeFilho").value;
+  let tel = document.getElementById("telefoneFilho").value.replace(/\D/g,'');
+
+  if (!mae || !filho || !tel) return alert("Preencha tudo");
+
+  atualizarContador();
+  coracoes();
+
+  let msg = `Filho(a) ${filho}, ser sua mãe é uma das coisas mais importantes da minha vida.
+
+Eu te amo mais do que consigo explicar 💛
+
+Com amor,
+${mae}`;
+
+  window.open(`https://wa.me/55${tel}?text=${encodeURIComponent(msg)}`);
+}
+</script>
+
+</body>
+</html>
