@@ -43,7 +43,7 @@ body {
   display: block;
 }
 
-/* BOTÃO VOLTAR AJUSTADO */
+/* VOLTAR */
 .voltar-container {
   display: flex;
   justify-content: flex-end;
@@ -58,10 +58,6 @@ body {
   border-radius: 20px;
   font-size: 12px;
   cursor: pointer;
-
-  /* ESSENCIAL */
-  width: auto;
-  display: inline-block;
 }
 
 /* CARD */
@@ -235,6 +231,7 @@ function coracoes() {
   }
 }
 
+/* FILHO → MÃE */
 function enviarFilho() {
   let nome = document.getElementById("nomePessoa").value;
   let mae = document.getElementById("nomeMae").value;
@@ -245,14 +242,16 @@ function enviarFilho() {
   atualizarContador();
   coracoes();
 
-  let msg = `Mãe ${mae}, queria que você soubesse o quanto eu sou grato por tudo que você é...
-
-Eu te amo. <3
+  let msg = `Mãe ${mae}, queria que você soubesse o quanto eu sou grato por tudo que você é e tudo que você faz por mim. Gratidão por cada gesto, cada palavra, cada sacrifício que muitas vezes passou em silêncio, mas nunca deixou de me alcançar. Seu jeito de cuidar, de se preocupar, de amar... é tudo tão único, tão seu. Você é minha paz em forma de gente.
+Agradeço por ser sempre refúgio, mesmo quando o mundo parece barulhento demais.
+Te amo com todo o meu coração, hoje, amanhã e sempre. E toda vez que eu puder retribuir só um pedacinho do que você me deu, vou me sentir muito feliz.
+Eu te amo,
 ${nome}`;
 
   window.open(`https://wa.me/55${tel}?text=${encodeURIComponent(msg)}`);
 }
 
+/* MÃE → FILHO (ATUALIZADO) */
 function enviarMae() {
   let mae = document.getElementById("nomeMaeMsg").value;
   let filho = document.getElementById("nomeFilho").value;
@@ -263,11 +262,11 @@ function enviarMae() {
   atualizarContador();
   coracoes();
 
-  let msg = `Filho(a) ${filho}, ser sua mãe é uma das coisas mais importantes da minha vida.
-
+  let msg = `${filho}, ser sua mãe é uma das coisas mais importantes da minha vida.
+Em cada fase sua, eu aprendo, me reinvento e sigo tentando dar o meu melhor por você.
+Nem sempre eu acerto, mas tudo que faço é por amor.
+Obrigada por ser quem você é.
 Eu te amo mais do que consigo explicar 💛
-
-Com amor,
 ${mae}`;
 
   window.open(`https://wa.me/55${tel}?text=${encodeURIComponent(msg)}`);
