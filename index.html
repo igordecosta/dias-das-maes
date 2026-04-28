@@ -214,7 +214,7 @@ input {
     <input id="nomeFilho" placeholder="Nome do filho(a)">
     <input id="telefoneFilho" placeholder="Whatsapp - Ex: 11987654321">
 
-    <button onclick="enviarMae()">Enviar 💛</button>
+    <button onclick="enviarMae()">Enviar 💌 </button>
   </div>
 </div>
 
@@ -237,7 +237,7 @@ function criarCoracao() {
   let heart = document.createElement("div");
   heart.className = "heart";
 
-  let cores = ["❤️", "🧡", "💙"];
+  let cores = ["❤️", "🧡", "💙", "🤍"];
   heart.innerHTML = cores[Math.floor(Math.random() * cores.length)];
 
   heart.style.left = Math.random() * 100 + "vw";
